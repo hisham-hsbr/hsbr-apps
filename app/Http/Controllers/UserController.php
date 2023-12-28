@@ -486,9 +486,11 @@ class UserController extends Controller
         if($oldAvatar = $request->user()->avatar){
             Storage::disk('public')->delete($oldAvatar);
         }
-        $file_name=Auth::user()->email;
+        $file_name=Auth::user()->email.'.jpg';
 
-        $path = Storage::disk('public')->put('images/avatars',$request->file('avatar'));
+        $file=$request->file('avatar');
+
+        $path = Storage::disk('public')->putFileAs('images/avatars/users',$file,$file_name);
         $id=Auth::user()->id;
         $user  = User::findOrFail($id);
         $user->avatar=$path;
