@@ -154,6 +154,20 @@
                                 menu_icon="fa fa-history" drop_icon="" />
                         @endcan {{-- Activity Logs Menu End --}}
                     </x-sidebar.sidebar-nav-level>
+                @endcanany {{-- Fixancare Menu --}}
+                {{-- Fixancare Start --}}
+                @canany(['Mobile Service Read', 'Role Read', 'Permission Read', 'Activity Logs Read'])
+                    <x-sidebar.sidebar-nav-level head="Fixancare" href="#"
+                        menu_open="{{ request()->is('admin/fixancare*') ? 'menu-open' : '' }}"
+                        active="{{ request()->is('admin/fixancare/*') ? 'active' : '' }}" menu_icon="fa fa-folder-open"
+                        drop_icon="fas fa-angle-left">
+                        {{-- Mobile Service Menu Start --}}
+                        @can('Mobile Service Read')
+                            <x-sidebar.sidebar-nav-multi-level head="Mobile service" href="{{ route('mobile-services.index') }}"
+                                menu_open="" active="{{ request()->is('admin/fixancare/mobile-service*') ? 'active' : '' }}"
+                                menu_icon="fa fa-mobile" drop_icon="" />
+                        @endcan {{-- Mobile Service Menu End --}}
+                    </x-sidebar.sidebar-nav-level>
                 @endcanany {{-- Users Management Menu --}}
             @endcanany {{-- Admin Aection Menu --}}
         </ul>
